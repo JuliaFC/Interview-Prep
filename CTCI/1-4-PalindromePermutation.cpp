@@ -19,10 +19,7 @@ for(auto c : s) {
     }
 }
 
-if(oddN > 1) {
-    return false;
-}
-return true;
+return !(oddN > 1);
 }
 
 int main() 
