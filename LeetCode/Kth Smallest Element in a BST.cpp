@@ -9,17 +9,20 @@
  */
 class Solution {
 public:
+    int res = 0;
     
-    void buildArray(TreeNode* root, vector<int> &arr){
-        if(!root) return;
-        buildArray(root->left, arr);
-        arr.push_back(root->val);
-        buildArray(root->right, arr);
+    void searchKth(TreeNode* root, int &k){
+        if(root->left) searchKth(root->left, k);
+        k--;
+        if(k == 0){
+            res = root->val;
+            return;
+        }
+        if(root->right) searchKth(root->right, k);
     }
     
     int kthSmallest(TreeNode* root, int k) {
-        vector<int> arr;
-        buildArray(root, arr);
-        return arr[k-1];
+        searchKth(root, k);
+        return res;
     }
 };
