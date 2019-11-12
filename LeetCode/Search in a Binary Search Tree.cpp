@@ -10,14 +10,24 @@
 class Solution {
 public:
     TreeNode* searchBST(TreeNode* root, int val) {
-        if(!root) return NULL;
+        stack<TreeNode*> st;
+        TreeNode *cur;
         
-        if(root->val == val) {
-            return root;
+        st.push(root);
+        while(!st.empty()) {
+            
+            cur = st.top();
+            st.pop();
+              
+            if(!cur) return NULL;
+            
+            if(cur->val == val) return cur;
+            
+            else if(val < cur->val) st.push(cur->left);
+            
+            else st.push(cur->right);
         }
         
-        if(val <= root->val) return searchBST(root->left, val);
-        
-        else return searchBST(root->right, val);
+        return cur;
     }
 };
